@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from drf_yasg.utils import swagger_auto_schema
 
-from ..serializers import ProjectSerializer
+from ..serializers import ProjectSerializer,ProjectGetSerializer
 from ..models import Project
 
 class ProjectApiview(APIView):
@@ -58,5 +58,11 @@ class ProjectApiview(APIView):
         return Response(serializer.errors)
 
 
-
+class ProjectGet(APIView):
+    def get(self, request, pk):
+        user = request.user
+        product = Project.objects.get(id=pk)
+        serializer = ProjectGetSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+                 
 

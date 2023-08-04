@@ -1,3 +1,3 @@
 from .user import Register, UserLoginView, UserLogoutView
-from .investor import Invistor,InvestorUpdate
-from .project import ProjectApiview
+from .investor import InvestorGet, InvistorApiview
+from .project import ProjectApiview,ProjectGet
