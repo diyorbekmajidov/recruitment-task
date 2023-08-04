@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['id', 'owner', 'name', 'min_investment_amount', 'deadline', 'invested', 'investor']
+        fields = "__all__"
 
 class InvestorSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()

@@ -23,7 +23,6 @@ class Invistor(APIView):
         data = request.data
         user = request.user
         data["user"] = user.id
-        print(data)
         serializer = InvestorSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
