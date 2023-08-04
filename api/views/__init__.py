@@ -1,2 +1,2 @@
 from .user import Register, UserLoginView, UserLogoutView
-from .investor import Invistor
+from .investor import Invistor,InvestorUpdate
