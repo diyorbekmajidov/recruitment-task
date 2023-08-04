@@ -14,6 +14,7 @@ class ProjectApiview(APIView):
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
+        operation_description="bu api endpoint projectlar qo'shadi.",
         request_body=ProjectSerializer, 
         responses={
             200: ProjectSerializer(many=True)
@@ -43,7 +44,10 @@ class ProjectApiview(APIView):
         serializer = ProjectSerializer(product, many = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+
+class ProjectUpdate(APIView):
     @swagger_auto_schema(
+        operation_description="bu api endpoint talangan user update qiladi.",
         request_body=ProjectSerializer,
         responses={
             200:ProjectSerializer(many=True)
@@ -59,6 +63,13 @@ class ProjectApiview(APIView):
 
 
 class ProjectGet(APIView):
+    @swagger_auto_schema(
+        operation_description="bu API endpoint, tanlangan loyiha uchun mos barcha investorlarni chiqaradi.",
+        responses={
+            200: ProjectGetSerializer(many=True)
+        }
+    )
+
     def get(self, request, pk):
         user = request.user
         product = Project.objects.get(id=pk)

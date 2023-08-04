@@ -41,6 +41,8 @@ class InvistorApiview(APIView):
         serializer = InvestorSerializer(investor, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+
+class InvestorUpdate(APIView):
     @swagger_auto_schema(
         request_body=InvestorSerializer,
         operation_description='Update by investor id',
