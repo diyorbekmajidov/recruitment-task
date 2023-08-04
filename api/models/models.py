@@ -19,7 +19,7 @@ class Investor(models.Model):
     project_deadline = models.DateField()
 
     def __str__(self):
-        return self.user.email
+        return self.user.username
     
 
 class Project(models.Model):

@@ -6,15 +6,16 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
 
-class InvestorSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    class Meta:
-        model = Investor
-        fields = ['id', 'user', 'budget', 'project_deadline']
-
 class ProjectSerializer(serializers.ModelSerializer):
-    owner = UserSerializer()
-    investor = InvestorSerializer()
     class Meta:
         model = Project
         fields = ['id', 'owner', 'name', 'min_investment_amount', 'deadline', 'invested', 'investor']
+
+class InvestorSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+    class Meta:
+        model = Investor
+        fields = "__all__"
+
+    def get_user(self, obj):
+        return UserSerializer(obj.user).data
