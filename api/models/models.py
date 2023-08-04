@@ -1,21 +1,20 @@
 from django.db import models
-from django.contrib.auth. models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name  = models.CharField(max_length=255, blank=True , null=True)
+    email      = models.EmailField(max_length=64, blank=True, null=True, default=False)
 
-    # USERNAME_FIELD = 'email'
+
 
     def __str__(self):
-        return self.email
+        return self.username
     
 
 class Investor(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='investor')
     budget = models.IntegerField()
     project_deadline = models.DateField()
 
@@ -24,7 +23,7 @@ class Investor(models.Model):
     
 
 class Project(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project')
     name = models.CharField(max_length=255)
     min_investment_amount = models.IntegerField()
     deadline = models.DateField()
